@@ -62,19 +62,31 @@ The application will now be running. Open your web browser and navigate to http:
 📂 Project Structure
 The project is organized into a modular and easy-to-understand structure using Flask Blueprints.
 
-/
-│── app.py              # Main application entry point and Flask app setup
-│── requirements.txt    # List of all Python dependencies
-│── data.xlsx           # The Excel file acting as the database
-├── .gitignore          # Specifies files for Git to ignore
-├── README.md           # This project description file
-├── routes/             # Contains all the application's routes (logic)
-│   ├── users/
-│   │   └── users.py    # Handles user registration, login, dashboard
-│   ├── products/
-│   │   └── products.py # Handles product display and management
-│   └── orders/
-│       └── orders.py   # Handles shopping cart and order history
+ECOMMERCE_APP/
+│── app.py # Main entry point
+│── requirements.txt # Dependencies
+│── data_new.xlsx # Excel file (if using Excel DB)
+│── .gitignore
+│
+├── routes/ # All routes organized
+│ ├── users/ # Customer/Seller/Admin routes
+│ │ └── users.py
+│ ├── products/ # Product related routes
+│ │ └── products.py
+│ └── orders/ # Order management
+│ └── orders.py
+│
+├── templates/ # HTML files
+│ ├── users/
+│ │ ├── register.html
+│ │ ├── login.html
+│ │ └── dashboard.html
+│ ├── products/
+│ │ └── products.html
+│ └── orders/
+| │ ├── cart.html
+│ └── orders.html
+│         
 └── templates/          # Contains all the HTML files for the frontend
     ├── base.html       # The master template with the main layout and navbar
     ├── users/          # User-related templates
