@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto">
+
+    <!-- Personalized Header -->
+    <div class="flex items-center mb-8 px-4">
+        <div class="w-16 h-16 bg-violet-900/50 rounded-full flex items-center justify-center mr-5 ring-2 ring-violet-500">
+            <i class="fas fa-user-astronaut text-3xl text-violet-300"></i>
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold text-white tracking-wide">Welcome, {{ session.user.Username }}!</h1>
+            <p class="text-md text-gray-400">Here's your personal mission control center.</p>
+        </div>
+    </div>
+
+    <!-- Quick Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="glass-card rounded-xl p-6 flex items-center space-x-4">
+            <div class="text-4xl text-violet-400"><i class="fas fa-shopping-bag"></i></div>
+            <div>
+                <p class="text-gray-400 text-sm">Total Orders</p>
+                <p class="text-2xl font-bold text-white">5</p> <!-- Note: This is a placeholder value -->
+            </div>
+        </div>
+        <div class="glass-card rounded-xl p-6 flex items-center space-x-4">
+            <div class="text-4xl text-violet-400"><i class="fas fa-box-open"></i></div>
+            <div>
+                <p class="text-gray-400 text-sm">Items Purchased</p>
+                <p class="text-2xl font-bold text-white">12</p> <!-- Note: This is a placeholder value -->
+            </div>
+        </div>
+        <div class="glass-card rounded-xl p-6 flex items-center space-x-4">
+            <div class="text-4xl text-violet-400"><i class="fas fa-star"></i></div>
+            <div>
+                <p class="text-gray-400 text-sm">Account Status</p>
+                <p class="text-2xl font-bold text-green-400">Active</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Action Panel -->
+    <div class="glass-card rounded-xl p-8">
+        <h2 class="text-2xl font-bold text-white mb-6">What would you like to do?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Link to Browse Products -->
+            <a href="{{ url_for('products.all_products') }}" class="aurora-btn group p-6 text-left flex items-center space-x-4">
+                <i class="fas fa-tags text-4xl text-violet-300 transition-transform duration-300 group-hover:rotate-12"></i>
+                <div>
+                    <span class="text-xl font-semibold">Browse Products</span>
+                    <p class="text-sm text-gray-300 opacity-80">Explore our full catalog of items.</p>
+                </div>
+            </a>
+            
+            <!-- Link to View My Orders -->
+            <a href="{{ url_for('orders.list_orders') }}" class="aurora-btn group p-6 text-left flex items-center space-x-4">
+                <i class="fas fa-receipt text-4xl text-violet-300 transition-transform duration-300 group-hover:rotate-12"></i>
+                <div>
+                    <span class="text-xl font-semibold">View My Orders</span>
+                    <p class="text-sm text-gray-300 opacity-80">Check your purchase history and status.</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="mt-8 border-t border-gray-700 pt-6 text-center">
+            <a href="{{ url_for('users.logout') }}" class="text-gray-400 hover:text-red-400 transition-colors">
+                <i class="fas fa-sign-out-alt mr-2"></i>Log Out
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
