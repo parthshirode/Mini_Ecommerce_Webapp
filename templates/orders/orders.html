@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if role == 'customer' %}My Orders
+    {% elif role == 'seller' %}Product Sales
+    {% else %}All Orders
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <h1 class="text-4xl font-bold text-center text-white mb-8 tracking-wider">
+        <i class="fas fa-receipt text-violet-400 mr-3"></i>
+        {% if role == 'customer' %}My Order History
+        {% elif role == 'seller' %}Your Product Sales
+        {% else %}All Customer Orders
+        {% endif %}
+    </h1>
+
+    {% if not orders %}
+    <div class="glass-card rounded-xl p-12 text-center">
+        <i class="fas fa-box-open text-7xl text-violet-400 opacity-50 mb-6"></i>
+        <h2 class="text-3xl font-bold text-white mb-3">No orders found.</h2>
+        {% if role == 'customer' %}
+        <p class="text-lg text-gray-300">It looks like you haven't placed any orders yet.</p>
+        {% else %}
+        <p class="text-lg text-gray-300">There are currently no orders to display.</p>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="glass-card rounded-xl p-4">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-gray-300">
+                <thead class="text-xs text-violet-300 uppercase bg-gray-900/50">
+                    <tr>
+                        <th class="py-3 px-4">Order ID</th>
+                        <th class="py-3 px-4">Product Name</th>
+                        <th class="py-3 px-4">Order Date</th>
+                        <th class="py-3 px-4">Quantity</th>
+                        <th class="py-3 px-4">Total Price</th>
+                        {% if role in ['admin', 'seller'] %}
+                        <th class="py-3 px-4">Customer ID</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr class="border-b border-gray-800 hover:bg-gray-900/60">
+                        <td class="py-3 px-4 font-medium">#{{ order['OrderID'] }}</td>
+                        <td class="py-3 px-4">{{ order['Name'] }}</td>
+                        <td class="py-3 px-4">{{ order['OrderDate'] }}</td>
+                        <td class="py-3 px-4">{{ order['Quantity'] }}</td>
+                        <td class="py-3 px-4">₹{{ "%.2f"|format(order['TotalPrice']) }}</td>
+                        {% if role in ['admin', 'seller'] %}
+                        <td class="py-3 px-4">{{ order['UserID'] }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
